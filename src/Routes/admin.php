@@ -14,23 +14,29 @@ use Illuminate\Support\Facades\Route;
  */
 
 Route::middleware(config('admin.routes.middleware'))
-      ->prefix(config('admin.routes.prefix'))
-      ->name(config('admin.routes.prefix').'.')
-      ->namespace('\LaravelBoilerplates\Admin\Controllers')
-      ->group(function () {
+  ->prefix(config('admin.routes.prefix'))
+  ->name(config('admin.routes.prefix').'.')
+  ->namespace('\LaravelBoilerplates\Admin\Controllers')
+  ->group(function () {
 
-  Route::get('/', function () {
-      redirect()->route('admin.dashboard');
-  });
-  Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+    Route::get('/', function () {
+        redirect()->route('admin.dashboard');
+    });
 
-  Route::prefix('auth')->name('auth.')->namespace('Auth')->group(function () {
-  	Route::resource('/users', 'UserController');
+    Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 
-  	Route::resource('/roles', 'RoleController');
-  	Route::post('/roles/{role}/users', 'RoleUsersController@store')->name('roles.users.store');
-  	Route::delete('/roles/{role}/users/{user}', 'RoleUsersController@destroy')->name('roles.users.destroy');
+    Route::resource('setting', 'SettingController', [
+        'except' => ['delete']
+    ]);
 
-  	Route::resource('/permissions', 'PermissionController');
-  });
+
+    Route::prefix('auth')->name('auth.')->namespace('Auth')->group(function () {
+      	Route::resource('/users', 'UserController');
+
+      	Route::resource('/roles', 'RoleController');
+      	Route::post('/roles/{role}/users', 'RoleUsersController@store')->name('roles.users.store');
+      	Route::delete('/roles/{role}/users/{user}', 'RoleUsersController@destroy')->name('roles.users.destroy');
+
+      	Route::resource('/permissions', 'PermissionController');
+    });
 });

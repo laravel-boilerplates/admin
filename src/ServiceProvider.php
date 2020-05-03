@@ -15,6 +15,7 @@ class ServiceProvider extends LaravelServiceProvider
     {
         $this->loadRoutesFrom(__DIR__.'/Routes/admin.php');
         $this->loadViewsFrom(__DIR__.'/Views', 'admin');
+        $this->loadMigrationsFrom(__DIR__.'/Database/migrations');
 
 
         if ($this->app->runningInConsole()) {
@@ -25,6 +26,10 @@ class ServiceProvider extends LaravelServiceProvider
             $this->publishes([
                 __DIR__.'/Views' => resource_path('views/vendor/admin'),
             ], 'views');
+
+            $this->publishes([
+                __DIR__.'/Database/seeds' => database_path('seeds'),
+            ], 'seeds');
 
             // $this->commands([]);
         }

@@ -19,7 +19,8 @@
       "laravel-view-components/elements": "dev-master",
       "laravel-view-components/forms": "dev-master",
       "laravel-view-components/notifications": "dev-master",
-      "laravel/passport": "^8.4"
+      "laravel/passport": "^8.4",
+      "spatie/laravel-medialibrary": "dev-master"
     },
     "autoload": {
         "psr-4": {

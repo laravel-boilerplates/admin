@@ -1,4 +1,4 @@
-@extends('admin::page')
+@extends('admin::layouts.page')
 
 @section('content')
 <div class="page-header">
@@ -8,9 +8,6 @@
         Overview
       </div>
       <h2 class="page-title">Users</h2>
-    </div>
-    <div class="col-auto">
-      <div class="text-muted text-h5 mt-2">Showing {{ $users->firstItem() }} through {{ $users->lastItem() }} of {{ $users->total() }} users</div>
     </div>
     <div class="col-auto ml-auto d-print-none">
       <a href="#" class="btn btn-primary ml-3 d-none d-sm-inline-block" data-toggle="modal" data-target="#modal-report">

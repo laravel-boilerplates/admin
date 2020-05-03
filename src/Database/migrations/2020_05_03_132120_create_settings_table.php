@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddDriverToUsersTable extends Migration
+class CreateSettingsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,13 @@ class AddDriverToUsersTable extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->string('driver')->default('email');
+        Schema::create('settings', function (Blueprint $table) {
+            $table->string('key')->unique();
+            $table->string('name')->nullable();
+            $table->string('value');
+            $table->timestampTz('updated_at');
+
+            $table->primary('key');
         });
     }
 
@@ -25,8 +30,6 @@ class AddDriverToUsersTable extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('driver');
-        });
+        Schema::dropIfExists('settings');
     }
 }
