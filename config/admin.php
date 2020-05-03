@@ -6,11 +6,11 @@ return [
      |--------------------------------------------------------------------------
      | Admin Settings
      |--------------------------------------------------------------------------
-     |
-     | Set the route prefix for all admin paths.
+     |  Configures the Route group for all Admin pages.
      |
      */
     'routes' => [
         'prefix'    => 'admin',
+        'middleware'=> 'web'
     ],
 ];

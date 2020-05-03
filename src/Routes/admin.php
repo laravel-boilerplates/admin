@@ -13,7 +13,12 @@ use Illuminate\Support\Facades\Route;
  |
  */
 
-Route::middleware('web')->prefix('admin')->namespace('\LaravelBoilerplates\Admin\Controllers')->name('admin.')->group(function () {
+Route::middleware(config('admin.routes.middleware'))
+      ->prefix(config('admin.routes.prefix'))
+      ->name(config('admin.routes.prefix').'.')
+      ->namespace('\LaravelBoilerplates\Admin\Controllers')
+      ->group(function () {
+
   Route::get('/', function () {
       redirect()->route('admin.dashboard');
   });

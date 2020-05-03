@@ -80,7 +80,7 @@
     </h1>
     <div class="page-subtitle">{{ $users->firstItem() }} to {{ $users->lastItem() }} of {{ $users->total() }} users</div>
     <div class="page-options d-flex">
-      <a class="btn btn-sm btn-primary" href="{{ route('admin.auth.users.create') }}">New user</a>
+      <a class="btn btn-sm btn-primary" href="{{ Admin::route('auth.users.create') }}">New user</a>
     </div>
 </div>
 <div class="row row-cards">

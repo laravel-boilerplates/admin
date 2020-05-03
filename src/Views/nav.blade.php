@@ -13,7 +13,7 @@
               </span>
             </a>
           </li>
-          <li class="nav-item{{ Request::is('admin/auth*') ? ' active' : '' }} dropdown">
+          <li class="nav-item{{ Admin::requestIs('auth*') ? ' active' : '' }} dropdown">
             <a class="nav-link dropdown-toggle" href="#navbar-extra" data-toggle="dropdown" role="button" aria-expanded="false">
               <span class="nav-link-icon d-md-none d-lg-inline-block"><svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"></path><path d="M12 17.75l-6.172 3.245 1.179-6.873-4.993-4.867 6.9-1.002L12 2l3.086 6.253 6.9 1.002-4.993 4.867 1.179 6.873z"></path></svg>
               </span>
@@ -23,17 +23,17 @@
             </a>
             <ul class="dropdown-menu">
               <li>
-                <a class="dropdown-item{{ Request::is('admin/auth/users*') ? ' active' : '' }}" href="./invoice.html">
+                <a class="dropdown-item{{ Admin::requestIs('auth/users*') ? ' active' : '' }}" href="./invoice.html">
                   Users
                 </a>
               </li>
               <li>
-                <a class="dropdown-item{{ Request::is('admin/auth/roles*') ? ' active' : '' }}" href="./blog.html">
+                <a class="dropdown-item{{ Admin::requestIs('auth/roles*') ? ' active' : '' }}" href="./blog.html">
                   Roles
                 </a>
               </li>
               <li>
-                <a class="dropdown-item{{ Request::is('admin/auth/permissions*') ? ' active' : '' }}" href="./snippets.html">
+                <a class="dropdown-item{{ Admin::requestIs('auth/permissions*') ? ' active' : '' }}" href="./snippets.html">
                   Permissions
                 </a>
               </li>
