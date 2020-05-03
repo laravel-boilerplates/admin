@@ -1,0 +1,45 @@
+<?php
+
+namespace LaravelBoilerplates\Admin;
+
+use Illuminate\Support\ServiceProvider as LaravelServiceProvider;
+
+class ServiceProvider extends LaravelServiceProvider
+{
+    /**
+     * Bootstrap services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        $this->loadRoutesFrom(__DIR__.'/Routes/admin.php');
+        $this->loadViewsFrom(__DIR__.'/Views', 'admin');
+
+
+        if ($this->app->runningInConsole()) {
+            $this->publishes([
+                __DIR__.'/../config/admin.php' => config_path('admin.php'),
+            ], 'config');
+
+            $this->publishes([
+                __DIR__.'/Views' => resource_path('views/vendor/admin'),
+            ], 'views');
+
+            // $this->commands([]);
+        }
+    }
+
+    /**
+     * Register the application services.
+     */
+    public function register()
+    {
+        $this->mergeConfigFrom(__DIR__.'/../config/admin.php', 'admin');
+
+        // Register the main class to use with the facade
+        $this->app->singleton(Admin::class, function () {
+            return new Admin;
+        });
+    }
+}
