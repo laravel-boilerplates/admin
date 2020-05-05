@@ -32,6 +32,7 @@ Route::middleware(config('admin.routes.middleware'))
 
     Route::prefix('auth')->name('auth.')->namespace('Auth')->group(function () {
       	Route::resource('/users', 'UserController');
+      	Route::resource('/providers', 'ProviderController');
 
       	Route::resource('/roles', 'RoleController');
       	Route::post('/roles/{role}/users', 'RoleUsersController@store')->name('roles.users.store');

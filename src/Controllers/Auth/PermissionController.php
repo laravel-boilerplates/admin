@@ -3,6 +3,7 @@
 namespace LaravelBoilerplates\Admin\Controllers\Auth;
 
 use Illuminate\Routing\Controller;
+use LaravelBoilerplates\Admin\Models\Auth\Permission;
 use LaravelBoilerplates\Admin\Requests\PermissionRequest as Request;
 
 class PermissionController extends Controller
@@ -16,7 +17,7 @@ class PermissionController extends Controller
     {
       $permissions = Permission::with('roles')->paginate();
 
-      return view('admin.auth.permissions.index')->with(compact('permissions'));
+      return view('admin::auth.permissions.index')->with(compact('permissions'));
     }
 
     /**

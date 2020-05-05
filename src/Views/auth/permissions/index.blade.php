@@ -1,13 +1,87 @@
-@extends('layouts.app')
+@extends('admin::layouts.page')
 
 @section('content')
 <div class="page-header">
+  <div class="row align-items-center">
+    <div class="col-auto">
+      <div class="page-pretitle">
+        Overview
+      </div>
+      <h2 class="page-title">Permissions</h2>
+    </div>
+    <div class="col-auto ml-auto d-print-none">
+      <x-notification-modal class="btn-primary" text="Create Permission">
+        @include('admin::auth.permissions._form')
+      </x-notification-modal>
+    </div>
+  </div>
+</div>
+<div class="box">
+  <div class="card">
+    <div class="table-responsive">
+      <table class="table table-vcenter card-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Label</th>
+            <th>Description</th>
+            <th class="w-1"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @forelse($permissions as $permission)
+            <tr>
+              <td>
+                <div class="d-flex lh-sm py-1 align-items-center">
+                  <div class="flex-fill">
+                    <div class="strong">{{ $permission->key }}</div>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <div class="strong">{{ $permission->name }}</div>
+              </td>
+              <td>
+                <div class="strong">{{ $permission->updated_at }}</div>
+              </td>
+            </tr>
+          @empty
+            <tr>
+              <td colspan="4">
+                <div class="empty">
+                  <div class="empty-icon">
+                    <!-- SVG icon code -->
+                  </div>
+                  <p class="empty-title h3">No results found</p>
+                  <p class="empty-subtitle text-muted">
+                    Try adjusting your search or filter to find what you're looking for.
+                  </p>
+                </div>
+              </td>
+            </tr>
+          @endforelse
+        </tbody>
+      </table>
+    </div>
+    <div class="card-footer d-flex align-items-center">
+      <p class="m-0 text-muted">Showing {{ $permissions->firstItem() }} to {{ $permissions->lastItem() }} of {{ $permissions->total() }} users</p>
+    @if($permissions->hasPages())
+      {{ $permissions->links() }}
+    @endif
+    </div>
+  </div>
+</div>
+@endsection
+
+
+@section('contents')
+<div class="page-header">
     <h1 class="page-title">
-        Site Permissions
+        User Administration
     </h1>
-    <div class="page-subtitle">{{ $permissions->firstItem() }} to {{ $permissions->lastItem() }} of {{ $permissions->total() }} permissions</div>
+    <div class="page-subtitle">{{ $permissions->firstItem() }} to {{ $permissions->lastItem() }} of {{ $permissions->total() }} users</div>
     <div class="page-options d-flex">
-      <a class="btn btn-sm btn-primary" href="{{ route('admin.auth.permissions.create') }}">New permission</a>
+      <a class="btn btn-sm btn-primary" href="{{ Admin::route('auth.users.create') }}">New user</a>
     </div>
 </div>
 <div class="row row-cards">
@@ -16,65 +90,68 @@
             <table class="table card-table table-vcenter">
                 <thead>
                     <tr>
+                        <th class="w-1"></th>
                         <th>Name</th>
-                        <th class="d-none d-md-table-cell">Description</th>
-                        <th class="d-none d-md-table-cell">Tag</th>
+                        <th class="d-none d-md-table-cell">Email</th>
+                        <th class="d-none d-md-table-cell">Phone</th>
+                        <th class="d-none d-md-table-cell">Account Status</th>
+                        <th class="d-none d-md-table-cell">Auth Source</th>
                         <th class="d-none d-md-table-cell">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($permissions as $permission)
+                    @foreach($permissions as $user)
                     <tr>
+                      <td class="text-center">
+                        component('users.avatar', compact('user')) endcomponent
+                      </td>
                       <td>
-                        <div>{{ $permission->label }}</div>
+                        <div>{{ $user->name }}</div>
                         <div class="small text-muted">
-                          Created: {{ $permission->created_at->toFormattedDateString() }}
+                          Registered: {{ $user->created_at->toFormattedDateString() }}
                         </div>
                       </td>
                       <td>
-                        <div>{{ $permission->description }}</div>
+                        <div>{{ $user->email }}</div>
                         <div class="small text-muted">
-                            {{ $permission->roles->count() }} assigned {{ Str::plural('role', $permission->roles->count()) }}
+                          @if( $user->hasVerifiedEmail() )
+                            <span class="status-icon bg-success"></span> Verified on {{ $user->email_verified_at->toFormattedDateString() }}
+                          @else
+                            <span class="status-icon bg-danger"></span> Unverified
+                          @endif
                         </div>
                       </td>
                       <td>
-                        <div>{{ $permission->name }}</div>
+                        <div>Unknown</div>
                         <div class="small text-muted">
-                            Code tag.
+                            <span class="status-icon bg-warning"></span> Unverified
                         </div>
+                      </td>
+                      <td>
+                        <div>{{ $user->updated_at->toDayDateTimeString() }}</div>
+                        <div class="small text-muted">
+                          @if( $user->is_active )
+                            <span class="status-icon bg-success"></span> Activated on {{ $user->activated_at->toFormattedDateString() }}
+                          @elseif( $user->is_pending_activation)
+                            <span class="status-icon bg-warning"></span> Pending activation on {{ $user->activated_at->toFormattedDateString() }}
+                          @else
+                            <span class="status-icon bg-danger"></span> Inactive
+                          @endif
+                        </div>
+                      </td>
+                      <td>
+                        component('users.source', compact('user')) endcomponent
                       </td>
                       <td class="text-center">
-                        <div class="btn-group btn-group-sm" role="group" aria-label="Button group with nested dropdown">
-                          <a class="btn btn-primary" href="{{ route('admin.auth.permissions.show', $permission) }}" role="button">
-                            View
-                          </a>
-                          <a class="btn btn-primary" href="{{ route('admin.auth.permissions.edit', $permission) }}" role="button">
-                            Edit
-                          </a>
-
-                          <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="sr-only">Toggle Dropdown</span>
-                          </button>
-                          <div class="dropdown-menu">
-                            <a href="{{ route('admin.auth.permissions.edit', $permission) }}" class="dropdown-item">
-                              <i class="dropdown-icon fe fe-edit-2"></i> Edit
-                            </a>
-                            <div class="dropdown-divider"></div>
-                            {!! Form::open(['route' => ['admin.auth.permissions.destroy', $permission], 'method' => 'DELETE']) !!}
-                            <button type="submit" class="dropdown-item">
-                              <i class="dropdown-icon fe fe-trash"></i> Delete
-                            </button>
-                            {!! Form::close() !!}
-                          </div>
-                        </div>
+                        component('table.actions', ['model' => $user, 'route' => 'admin.auth.users']) endcomponent
                       </td>
                     </tr>
                     @endforeach
                 </tbody>
             </table>
             @if($permissions->hasPages())
-                {{ $permissions->links() }}
-                @endif
+              {{ $permissions->links() }}
+            @endif
         </div>
     </div>
 </div>

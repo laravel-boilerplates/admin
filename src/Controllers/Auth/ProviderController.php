@@ -2,12 +2,42 @@
 
 namespace LaravelBoilerplates\Admin\Controllers\Auth;
 
+use Socialite;
+use Illuminate\Support\Collection;
 use Illuminate\Routing\Controller;
-use LaravelBoilerplates\Admin\Models\Auth\Role;
+use LaravelBoilerplates\Admin\Models\Auth\Provider;
 use LaravelBoilerplates\Admin\Requests\Auth\RoleRequest as Request;
 
-class RoleController extends Controller
+class ProviderController extends Controller
 {
+    /**
+     * The alert id attribute.
+     *
+     * @var Illuminate\Support\Collection
+     */
+    public $providers;
+
+    /**
+     * Create a new component instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $providers = new Collection();
+
+        foreach (array_diff(scandir(base_path('vendor/socialiteproviders')), array('..', '.', 'manager')) as $name) {
+          $provider = new Provider([
+            'name' => $name,
+            'vendor_dir' => 'socialiteproviders/' . $name
+          ]);
+
+          $providers->push($provider);
+        }
+
+        $this->providers = $providers;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,9 +45,9 @@ class RoleController extends Controller
      */
     public function index()
     {
-      $roles = Role::with(['users', 'permissions'])->paginate();
+      $providers = $this->providers;
 
-      return view('admin::auth.roles.index')->with(compact('roles'));
+      return view('admin::auth.providers.index')->with(compact('providers'));
     }
 
     /**
@@ -27,7 +57,7 @@ class RoleController extends Controller
      */
     public function create()
     {
-      return view('admin::auth.roles.create');
+      return view('admin::auth.providers.create');
     }
 
     /**
@@ -42,18 +72,22 @@ class RoleController extends Controller
 
       flash($role->name . ' has been created.')->success();
 
-      return redirect()->route('admin.auth.roles.edit', $role);
+      return redirect()->route('admin.auth.providers.edit', $role);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Auth\Role  $role
+     * @param  string  $provider
      * @return \Illuminate\Http\Response
      */
-    public function show(Role $role)
+    public function show($provider)
     {
-      return redirect()->route('admin.auth.roles.edit', $role);
+      $provider = $this->providers->get($provider);
+
+      dd($this->providers);
+
+      return view('admin::auth.providers.show')->with(compact('provider'));
     }
 
     /**
@@ -64,7 +98,7 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
-      return view('admin.auth.roles.edit')->with(compact('role'));
+      return view('admin.auth.providers.edit')->with(compact('role'));
     }
 
     /**
@@ -80,7 +114,7 @@ class RoleController extends Controller
 
       flash($role->name . ' has been updated.')->success();
 
-      return redirect()->route('admin.auth.roles.show', $role);
+      return redirect()->route('admin.auth.providers.show', $role);
     }
 
     /**
@@ -96,6 +130,6 @@ class RoleController extends Controller
 
       flash($name . ' has been deleted.')->success();
 
-      return redirect()->route('admin.auth.roles.index');
+      return redirect()->route('admin.auth.providers.index');
     }
 }

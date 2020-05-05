@@ -7,11 +7,11 @@
       <div class="page-pretitle">
         Overview
       </div>
-      <h2 class="page-title">Roles</h2>
+      <h2 class="page-title">Providers</h2>
     </div>
     <div class="col-auto ml-auto d-print-none">
-      <x-notification-modal class="btn-primary" text="Create Role">
-        @include('admin::auth.roles._form')
+      <x-notification-modal class="btn-primary" text="Create Provider">
+        @include('admin::auth.providers._form')
       </x-notification-modal>
     </div>
   </div>
@@ -23,26 +23,30 @@
         <thead>
           <tr>
             <th>Name</th>
-            <th>Label</th>
-            <th>Description</th>
+            <th>Status</th>
+            <th>Client ID</th>
+            <th>Package Location</th>
             <th class="w-1"></th>
           </tr>
         </thead>
         <tbody>
-          @forelse($roles as $role)
+          @forelse($providers as $provider)
             <tr>
               <td>
                 <div class="d-flex lh-sm py-1 align-items-center">
                   <div class="flex-fill">
-                    <div class="strong">{{ $role->key }}</div>
+                    <div class="strong">{{ $provider->name }}</div>
                   </div>
                 </div>
               </td>
               <td>
-                <div class="strong">{{ $role->name }}</div>
+                <div class="strong">{{ $provider->status }}</div>
               </td>
               <td>
-                <div class="strong">{{ $role->updated_at }}</div>
+                <div class="strong">{{ $provider->client_id }}</div>
+              </td>
+              <td>
+                <div class="strong">vendor/{{ $provider->vendor_dir }}</div>
               </td>
             </tr>
           @empty
@@ -52,7 +56,7 @@
                   <div class="empty-icon">
                     <!-- SVG icon code -->
                   </div>
-                  <p class="empty-title h3">No providers found.</p>
+                  <p class="empty-title h3">No providers found</p>
                   <p class="empty-subtitle text-muted">
                     Try adjusting your search or filter to find what you're looking for.
                   </p>
@@ -62,12 +66,6 @@
           @endforelse
         </tbody>
       </table>
-    </div>
-    <div class="card-footer d-flex align-items-center">
-      <p class="m-0 text-muted">Showing {{ $roles->firstItem() }} to {{ $roles->lastItem() }} of {{ $roles->total() }} users</p>
-    @if($roles->hasPages())
-      {{ $roles->links() }}
-    @endif
     </div>
   </div>
 </div>
