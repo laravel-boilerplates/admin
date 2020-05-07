@@ -2,6 +2,7 @@
 
 namespace LaravelBoilerplates\Admin\Controllers;
 
+use Admin;
 use Illuminate\Routing\Controller;
 
 class DashboardController extends Controller
@@ -13,8 +14,8 @@ class DashboardController extends Controller
      */
     public function index()
     {
-      $users = User::paginate();
+      $users = Admin::user()->paginate();
 
-      return view('admin.dashboard', compact('users'));
+      return view('admin::dashboard', compact('users'));
     }
 }
