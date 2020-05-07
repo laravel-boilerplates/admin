@@ -11,6 +11,6 @@ return [
      */
     'routes' => [
         'prefix'    => 'admin',
-        'middleware'=> 'web'
+        'middleware'=> ['web', 'auth']
     ],
 ];
