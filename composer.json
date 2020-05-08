@@ -11,17 +11,14 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "laravel/framework": "^7.0",
-        "danswiser/tabler-preset": "dev-master",
-        "spatie/laravel-permission": "^3.11",
-        "spatie/laravel-query-builder": "^2.8",
         "lab404/laravel-impersonate": "^1.6",
+        "laravel-frontend-presets/tabler": "dev-master",
         "laravel-view-components/elements": "dev-master",
         "laravel-view-components/forms": "dev-master",
         "laravel-view-components/notifications": "dev-master",
-        "laravel/passport": "^8.4",
-        "socialiteproviders/manager": "~3.0",
-        "jenssegers/model": "^1.3.0"
+        "laravel/framework": "^7.0",
+        "spatie/laravel-permission": "^3.11",
+        "spatie/laravel-query-builder": "^2.8"
     },
     "autoload": {
         "psr-4": {
