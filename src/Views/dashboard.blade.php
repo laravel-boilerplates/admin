@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="row">
-  <div class="col-sm-6 col-xl-3">
+  <div class="col-sm-6 col-xl-4">
     <div class="card card-sm">
       <div class="card-body d-flex align-items-center">
         <span class="bg-blue text-white stamp mr-3">
@@ -22,7 +22,7 @@
       </div>
     </div>
   </div>
-  <div class="col-sm-6 col-xl-3">
+  <div class="col-sm-6 col-xl-4">
     <div class="card card-sm">
       <div class="card-body d-flex align-items-center">
         <span class="bg-green text-white stamp mr-3">
@@ -42,7 +42,7 @@
       </div>
     </div>
   </div>
-  <div class="col-sm-6 col-xl-3">
+  <div class="col-sm-6 col-xl-4">
     <div class="card card-sm">
       <div class="card-body d-flex align-items-center">
         <span class="bg-yellow text-white stamp mr-3">
@@ -51,26 +51,6 @@
         <div class="mr-3 lh-sm">
           <div class="strong">
             {{ $permissions->count() }} Permissions
-          </div>
-          <p class="mb-0 text-muted">
-            <span class="text-orange d-inline-flex align-items-center lh-1">
-              0% <svg xmlns="http://www.w3.org/2000/svg" class="icon ml-1" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"></path><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-            </span>
-            <span class="text-nowrap">Since last month</span>
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="col-sm-6 col-xl-3">
-    <div class="card card-sm">
-      <div class="card-body d-flex align-items-center">
-        <span class="bg-red text-white stamp mr-3">
-          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-md" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"></path><path d="M4 7h3a1 1 0 0 0 1 -1v-1a2 2 0 0 1 4 0v1a1 1 0 0 0 1 1h3a1 1 0 0 1 1 1v3a1 1 0 0 0 1 1h1a2 2 0 0 1 0 4h-1a1 1 0 0 0 -1 1v3a1 1 0 0 1 -1 1h-3a1 1 0 0 1 -1 -1v-1a2 2 0 0 0 -4 0v1a1 1 0 0 1 -1 1h-3a1 1 0 0 1 -1 -1v-3a1 1 0 0 1 1 -1h1a2 2 0 0 0 0 -4h-1a1 1 0 0 1 -1 -1v-3a1 1 0 0 1 1 -1"></path></svg>
-        </span>
-        <div class="mr-3 lh-sm">
-          <div class="strong">
-            {{ $providers->count() }} Providers
           </div>
           <p class="mb-0 text-muted">
             <span class="text-orange d-inline-flex align-items-center lh-1">

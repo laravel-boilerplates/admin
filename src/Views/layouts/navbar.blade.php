@@ -24,11 +24,6 @@
             </a>
             <ul class="dropdown-menu">
               <li>
-                <a class="dropdown-item{{ Admin::requestIs('auth/providers*') ? ' active' : '' }}" href="{{ Admin::route('auth.providers.index') }}">
-                  Providers
-                </a>
-              </li>
-              <li>
                 <a class="dropdown-item{{ Admin::requestIs('auth/users*') ? ' active' : '' }}" href="{{ Admin::route('auth.users.index') }}">
                   Users
                 </a>
