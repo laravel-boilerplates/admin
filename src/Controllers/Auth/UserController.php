@@ -4,6 +4,8 @@ namespace LaravelBoilerplates\Admin\Controllers\Auth;
 
 use Admin;
 use Illuminate\Routing\Controller;
+use LaravelBoilerplates\Admin\Models\Auth\Role;
+use LaravelBoilerplates\Admin\Models\Auth\Permission;
 use LaravelBoilerplates\Admin\Requests\UserRequest as Request;
 
 class UserController extends Controller
@@ -27,7 +29,7 @@ class UserController extends Controller
      */
     public function create()
     {
-      return view('admin.auth.users.create');
+      return view('admin::auth.users.create');
     }
 
     /**

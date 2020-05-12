@@ -2,6 +2,7 @@
 
 namespace LaravelBoilerplates\Admin;
 
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider as LaravelServiceProvider;
 
 class ServiceProvider extends LaravelServiceProvider
@@ -16,7 +17,6 @@ class ServiceProvider extends LaravelServiceProvider
         $this->loadRoutesFrom(__DIR__.'/Routes/admin.php');
         $this->loadViewsFrom(__DIR__.'/Views', 'admin');
         $this->loadMigrationsFrom(__DIR__.'/Database/migrations');
-
 
         if ($this->app->runningInConsole()) {
             $this->publishes([
@@ -33,6 +33,10 @@ class ServiceProvider extends LaravelServiceProvider
 
             // $this->commands([]);
         }
+
+        View::composer(
+            'admin::auth.users._form', 'LaravelBoilerplates\Admin\Composers\UserFormComposer'
+        );
     }
 
     /**
