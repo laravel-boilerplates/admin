@@ -34,15 +34,15 @@
               <td>
                 <div class="d-flex lh-sm py-1 align-items-center">
                   <div class="flex-fill">
-                    <div class="strong">{{ $role->key }}</div>
+                    <div class="strong">{{ $role->name }}</div>
                   </div>
                 </div>
               </td>
               <td>
-                <div class="strong">{{ $role->name }}</div>
+                <div class="strong">{{ $role->label }}</div>
               </td>
               <td>
-                <div class="strong">{{ $role->updated_at }}</div>
+                <div class="strong">{{ $role->description }}</div>
               </td>
             </tr>
           @empty
@@ -52,7 +52,7 @@
                   <div class="empty-icon">
                     <!-- SVG icon code -->
                   </div>
-                  <p class="empty-title h3">No providers found.</p>
+                  <p class="empty-title h3">No roles found.</p>
                   <p class="empty-subtitle text-muted">
                     Try adjusting your search or filter to find what you're looking for.
                   </p>
