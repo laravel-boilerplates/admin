@@ -31,6 +31,7 @@ Route::middleware(config('admin.routes.middleware'))
 
 
     Route::prefix('auth')->name('auth.')->namespace('Auth')->group(function () {
+      	Route::get('/', 'AuthController@index')->name('index');
       	Route::resource('/users', 'UserController');
 
       	Route::resource('/roles', 'RoleController');
