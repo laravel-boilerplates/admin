@@ -2,17 +2,16 @@
 
 namespace LaravelBoilerplates\Admin\Models\Auth;
 
-use Laravel\Passport\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
 use Lab404\Impersonate\Models\Impersonate;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use App\Traits\HasUuid;
+use LaravelBoilerplates\Admin\Traits\HasUuid;
 
 class User extends Authenticatable
 {
-    use SoftDeletes, HasUuid, Notifiable, HasRoles, Impersonate, HasApiTokens;
+    use HasUuid, Notifiable, HasRoles, Impersonate; // SoftDeletes, 
 
     /**
      * The attributes that are mass assignable.
