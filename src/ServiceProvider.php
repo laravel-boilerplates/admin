@@ -2,8 +2,11 @@
 
 namespace LaravelBoilerplates\Admin;
 
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider as LaravelServiceProvider;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class ServiceProvider extends LaravelServiceProvider
 {
@@ -37,6 +40,16 @@ class ServiceProvider extends LaravelServiceProvider
         View::composer(
             'admin::auth.users._form', 'LaravelBoilerplates\Admin\Composers\UserFormComposer'
         );
+
+        if (!Collection::hasMacro('paginate')) {
+            Collection::macro('paginate',
+                function ($perPage = 15, $page = null, $options = []) {
+                $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
+                return (new LengthAwarePaginator(
+                    $this->forPage($page, $perPage)->values()->all(), $this->count(), $perPage, $page, $options))
+                    ->withPath('');
+            });
+        }
     }
 
     /**
