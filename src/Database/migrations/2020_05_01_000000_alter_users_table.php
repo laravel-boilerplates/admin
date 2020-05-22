@@ -29,12 +29,10 @@ class AlterUsersTable extends Migration
      */
     public function down()
     {
-        $tableNames = config('permission.table_names');
-        Schema::table($tableNames['roles'], function (Blueprint $table) {
-            $table->dropColumn(['label', 'description']);
-        });
-        Schema::table($tableNames['permissions'], function (Blueprint $table) {
-            $table->dropColumn(['label', 'description']);
+      $usersTable = Admin::users()->getTable();
+
+      Schema::table($usersTable, function (Blueprint $table) {
+            $table->dropColumn(['uuid', 'socialite_driver']);
         });
     }
 }
