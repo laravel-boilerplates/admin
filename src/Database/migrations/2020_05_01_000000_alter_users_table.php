@@ -1,6 +1,5 @@
 <?php
 
-use LaravelBoilerplates\Admin;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,11 +13,14 @@ class AlterUsersTable extends Migration
      */
     public function up()
     {
-        $usersTable = Admin::users()->getTable();
+        $userClass = config('auth.providers.users.model');
+        $usersTable = (new $userClass)->getTable();
 
         Schema::table($usersTable, function (Blueprint $table) {
             $table->uuid('uuid');
-            $table->text('socialite_driver')->nullable();
+            $table->string('title')->nullable();
+            $table->string('socialite_driver')->nullable();
+            $table->string('password')->nullable()->change();
         });
     }
 
@@ -29,10 +31,12 @@ class AlterUsersTable extends Migration
      */
     public function down()
     {
-      $usersTable = Admin::users()->getTable();
+      $userClass = config('auth.providers.users.model');
+      $usersTable = (new $userClass)->getTable();
 
       Schema::table($usersTable, function (Blueprint $table) {
-            $table->dropColumn(['uuid', 'socialite_driver']);
+            $table->dropColumn(['uuid', 'title', 'socialite_driver']);
+            $table->string('password')->change();
         });
     }
 }
