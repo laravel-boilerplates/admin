@@ -41,7 +41,7 @@
               </div>
             </td>
             <td>
-              <div>Automation Specialist IV</div>
+              <div>{{ $user->title }}</div>
               <div class="text-muted text-h5">Accounting</div>
             </td>
             <td class="text-muted">

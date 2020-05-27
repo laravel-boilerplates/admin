@@ -10,9 +10,15 @@
       <h2 class="page-title">Roles</h2>
     </div>
     <div class="col-auto ml-auto d-print-none">
-      <x-notification-modal class="btn-primary" text="Create Role">
-        @include('admin::auth.roles._form')
-      </x-notification-modal>
+      <x-form-wrapper method="POST" action="auth.roles.store">
+        <x-notification-modal class="btn-primary" text="Create Role">
+            @include('admin::auth.roles._form')
+            <x-slot name="footer">
+              <button type="button" class="btn btn-white mr-auto" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Save changes</button>
+            </x-slot>
+        </x-notification-modal>
+      </x-form-wrapper>
     </div>
   </div>
 </div>

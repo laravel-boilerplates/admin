@@ -40,7 +40,7 @@ class RoleController extends Controller
     {
       $role = Role::create($request->all());
 
-      flash($role->name . ' has been created.')->success();
+      flash($role->name . ' has been created.', 'success');
 
       return redirect()->route('admin.auth.roles.edit', $role);
     }

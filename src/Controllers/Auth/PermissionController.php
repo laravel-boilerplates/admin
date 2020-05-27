@@ -4,7 +4,7 @@ namespace LaravelBoilerplates\Admin\Controllers\Auth;
 
 use Illuminate\Routing\Controller;
 use LaravelBoilerplates\Admin\Models\Auth\Permission;
-use LaravelBoilerplates\Admin\Requests\PermissionRequest as Request;
+use LaravelBoilerplates\Admin\Requests\Auth\PermissionRequest as Request;
 
 class PermissionController extends Controller
 {
@@ -40,7 +40,7 @@ class PermissionController extends Controller
     {
       $permission = Permission::create($request->all());
 
-      flash($permission->name . ' has been created.')->success();
+      flash($permission->name . ' has been created.', 'success');
 
       return redirect()->route('admin.auth.permissions.edit', $permission);
     }
@@ -78,7 +78,7 @@ class PermissionController extends Controller
     {
       $permission->update($request->all());
 
-      flash($permission->name . ' has been updated.')->success();
+      flash($permission->name . ' has been updated.', 'success');
 
       return redirect()->route('admin.auth.permissions.show', $permission);
     }

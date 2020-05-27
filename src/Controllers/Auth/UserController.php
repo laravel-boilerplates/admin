@@ -42,7 +42,7 @@ class UserController extends Controller
     {
       $user = User::create($request->all());
 
-      flash($user->name . ' has been created. You can now add contacts.')->success();
+      flash($user->name . ' has been created. You can now add contacts.', 'success');
 
       return redirect()->route('admin.auth.users.edit', [$user, 'section' => 'contacts']);
     }
