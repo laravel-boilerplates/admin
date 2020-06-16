@@ -1,0 +1,41 @@
+{
+    "name": "laravel-boilerplates/admin",
+    "description": "Another Laravel admin boilerplate.",
+    "keywords": ["laravel", "laravel admin"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Dan Wiser",
+            "email": "dan@wiser.ws"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "lab404/laravel-impersonate": "^1.6",
+        "laravel-boilerplates/base": "dev-master",
+        "laravel-frontend-presets/tabler": "dev-master",
+        "laravel-view-components/elements": "dev-master",
+        "laravel-view-components/forms": "dev-master",
+        "laravel-view-components/notifications": "dev-master",
+        "laravel/framework": "^7.0",
+        "spatie/laravel-permission": "^3.11",
+        "spatie/laravel-query-builder": "^2.8",
+        "spatie/laravel-menu": "dev-master",
+        "spatie/laravel-medialibrary": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "LaravelBoilerplates\\Admin\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+              "LaravelBoilerplates\\Admin\\ServiceProvider"
+            ],
+            "aliases": {
+                "Admin": "LaravelBoilerplates\\Admin\\Facades\\AdminFacade"
+            }
+        }
+    }
+}
