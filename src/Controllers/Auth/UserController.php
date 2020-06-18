@@ -2,7 +2,7 @@
 
 namespace LaravelBoilerplates\Admin\Controllers\Auth;
 
-use Admin;
+use Base;
 use Illuminate\Routing\Controller;
 use LaravelBoilerplates\Admin\Models\Auth\Role;
 use LaravelBoilerplates\Admin\Models\Auth\Permission;
@@ -17,7 +17,7 @@ class UserController extends Controller
      */
     public function index()
     {
-      $users = Admin::user()->paginate();
+      $users = Base::user()->paginate();
 
       return view('admin::auth.users.index')->with(compact('users'));
     }
@@ -40,7 +40,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-      $user = User::create($request->all());
+      $user = Base::user()->create($request->all());
 
       flash($user->name . ' has been created. You can now add contacts.', 'success');
 
