@@ -20,7 +20,6 @@
         "laravel/framework": "^7.0",
         "spatie/laravel-permission": "^3.11",
         "spatie/laravel-query-builder": "^2.8",
-        "spatie/laravel-menu": "dev-master",
         "spatie/laravel-medialibrary": "dev-master"
     },
     "autoload": {
