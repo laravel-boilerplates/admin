@@ -12,7 +12,7 @@
     "minimum-stability": "dev",
     "require": {
         "lab404/laravel-impersonate": "^1.6",
-        "laravel-boilerplates/base": "dev-master",
+        "laravel-boilerplates/base": "dev-main",
         "laravel-frontend-presets/tabler": "dev-master",
         "laravel-view-components/elements": "dev-master",
         "laravel-view-components/forms": "dev-master",
